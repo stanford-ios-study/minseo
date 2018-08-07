@@ -39,20 +39,20 @@ the fall term, 2017
 - Property Observer : 속성 감시자. 모든 속성은 속성의 변화를 감지하는 속성 감시자를 사용할 수 있다. UI와 인스턴스 변수의 싱크를 맞추기 위해 자주 사용된다.
 
   ````swift
-      var flipCount = 0 {
-          // 속성 감시자 : flipCount가 바뀔 때마다 didSet을 실행하여 Label과 싱크를 맞추어 업데이트한다.
-          didSet {
-              flipCountLabel.text = "Flips: \(flipCount)"
-          }
+  var flipCount = 0 {
+      // 속성 감시자 : flipCount가 바뀔 때마다 didSet을 실행하여 Label과 싱크를 맞추어 업데이트한다.
+      didSet {
+          flipCountLabel.text = "Flips: \(flipCount)"
       }
+  }
   ````
 
 - Oulet Collection == Array (배열은 제네릭 클래스다.)
 
   ````swift
-  	// Oulet Collection
-      @IBOutlet var cardButons: [UIButton]!
-  	@IBOutlet var cardButons: Array<UIButton>!
+  // Oulet Collection
+  @IBOutlet var cardButons: [UIButton]!
+  @IBOutlet var cardButons: Array<UIButton>!
   ````
 
 - var : 변수 / let : 상수
