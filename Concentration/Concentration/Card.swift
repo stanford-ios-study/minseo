@@ -21,10 +21,10 @@ struct Card {
     var identifier: Int
     
     // 정적 변수
-    static var identifierFactory = 0
+    private static var identifierFactory = 0
     
     // 정적 메소드
-    static func getUniqueIdentifier() -> Int {
+    private static func getUniqueIdentifier() -> Int {
         // 정적 메소드 안에서는 Card.이 없어도 정적 변수에 접근할 수 있다.
         identifierFactory += 1
         return identifierFactory
