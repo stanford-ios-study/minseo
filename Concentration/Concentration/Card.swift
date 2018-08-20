@@ -14,11 +14,17 @@ import Foundation
 **/
 
 // 모델이므로 카드 위에 어떤 그림이 그려지는지가 아니라 (UI), 카드가 무엇을 해야하는지, 어떻게 게임이 진행되는지가 담겨야한다.
-struct Card {
+struct Card : Hashable {
  
+    var hashValue: Int { return identifier }
+    
+    static func ==(lhs: Card, rhs: Card) -> Bool {
+        return lhs.identifier == rhs.identifier
+    }
+    
     var isFaceUp = false
     var isMatched = false
-    var identifier: Int
+    private var identifier: Int
     
     // 정적 변수
     private static var identifierFactory = 0

@@ -21,11 +21,26 @@ class ViewController: UIViewController {
     private(set) var flipCount = 0 {
         // 속성 감시자 : flipCount가 바뀔 때마다 didSet을 실행하여 Label과 싱크를 맞추어 업데이트한다.
         didSet {
-            flipCountLabel.text = "Flips: \(flipCount)"
+//            flipCountLabel.text = "Flips: \(flipCount)"
+            updateFlipCountLabel()
         }
     }
     
-    @IBOutlet private weak var flipCountLabel: UILabel!
+    func updateFlipCountLabel() {
+        let attributes: [NSAttributedStringKey:Any] = [
+            .strokeWidth : 5.0,
+            .strokeColor : #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+        ]
+        let attributedString = NSAttributedString(string: "Flips: \(flipCount)", attributes: attributes)
+        flipCountLabel.attributedText = attributedString
+    }
+    
+    @IBOutlet private weak var flipCountLabel: UILabel! {
+        // 이 연결이 만들어질 때 didSet을 호출한다.
+        didSet {
+            updateFlipCountLabel()
+        }
+    }
  
     // Oulet Collection
     @IBOutlet private var cardButtons: [UIButton]!
@@ -56,16 +71,27 @@ class ViewController: UIViewController {
         }
     }
     
-    private var emojiChoices = ["🎃","👻", "🐾", "🥀", "☃️", "🍒", "🍭", "🍡", "🍷"] // Array<String> 타입 추론
+//    private var emojiChoices = ["🎃","👻", "🐾", "🥀", "☃️", "🍒", "🍭", "🍡", "🍷"] // Array<String> 타입 추론
+    private var emojiChoices = ["🎃👻🐾🥀☃️🍒🍭🍡🍷"] // Array<String> 타입 추론
     
-    private var emoji = [Int:String]()
+    private var emoji = [Card:String]()
     
+//    private func emoji(for card: Card) -> String {
+//        if emoji[card] == nil, emojiChoices.count > 0 {
+//            // 유사 임의 번호 생성기 : 0부터 상한 사이의 숫자를 임의로 생성함.
+//            emoji[card] = emojiChoices.remove(at: emojiChoices.count.arc4random)
+//        }
+//        return  emoji[card] ?? "?"
+//    }
+    
+    // 배열 -> 문자열로 변경
     private func emoji(for card: Card) -> String {
-        if emoji[card.identifier] == nil, emojiChoices.count > 0 {
-            // 유사 임의 번호 생성기 : 0부터 상한 사이의 숫자를 임의로 생성함.
-            emoji[card.identifier] = emojiChoices.remove(at: emojiChoices.count.arc4random)
+        if emoji[card] == nil, emojiChoices.count > 0 {
+            // 문자열은 정수로 색인되지 않으므로 index 설정
+            let randomStringIndex = emojiChoices.index(emojiChoices.startIndex, offsetBy: emojiChoices.count.arc4random)
+            emoji[card] = String(emojiChoices.remove(at: randomStringIndex))
         }
-        return  emoji[card.identifier] ?? "?"
+        return emoji[card] ?? "?"
     }
 }
 
