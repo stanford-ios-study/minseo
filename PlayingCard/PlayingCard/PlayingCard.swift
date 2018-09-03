@@ -19,20 +19,17 @@ struct PlayingCard: CustomStringConvertible {
     // enum : 고정된 원시값을 각 경우마다 연관지을 수 있다.
     // objc의 열거형이 정수형이었기 때문에 수많은 원시값이 하위 호환성을 지원한다.
     enum Suit: String, CustomStringConvertible {
-        var description: String
-        
         case spades = "♠️"
-        case hearts = "♥️"
+        case hearts = "❤️"
         case diamonds = "♦️"
         case clubs = "♣️"
         
         // 모든 것을 가져올 것이므로 static 사용
         static var all = [Suit.spades, .hearts, .diamonds, .clubs]
+        var description: String {return rawValue}
     }
     
     enum Rank: CustomStringConvertible {
-        var description: String
-        
         case ace
         case face(String)
         case numeric(Int)
@@ -56,6 +53,14 @@ struct PlayingCard: CustomStringConvertible {
             }
             allRanks += [Rank.face("J"), Rank.face("Q"), Rank.face("K")]
             return allRanks
+        }
+        
+        var description: String {
+            switch self {
+            case .ace: return "A"
+            case .numeric(let pips): return String(pips)
+            case .face(let kind): return kind
+            }
         }
     }
 }
