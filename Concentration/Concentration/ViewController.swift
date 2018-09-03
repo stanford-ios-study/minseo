@@ -72,7 +72,7 @@ class ViewController: UIViewController {
     }
     
 //    private var emojiChoices = ["🎃","👻", "🐾", "🥀", "☃️", "🍒", "🍭", "🍡", "🍷"] // Array<String> 타입 추론
-    private var emojiChoices = ["🎃👻🐾🥀☃️🍒🍭🍡🍷"] // Array<String> 타입 추론
+    private var emojiChoices = "🎃👻🐾🥀☃️🍒🍭🍡🍷" // Array<String> 타입 추론
     
     private var emoji = [Card:String]()
     
