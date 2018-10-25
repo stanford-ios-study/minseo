@@ -58,6 +58,10 @@ struct Concentration
             cards += [card, card]
         }
         // TODO: Shuffle the cards
+        for i in cards.indices {
+            let randomIndex = (cards.count - 1).arc4random
+            cards.swapAt(i, randomIndex)
+        }
     }
     
 }
